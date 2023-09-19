@@ -1,0 +1,43 @@
+        public function setId($id) {
+            $this->id = $id;
+        }
+    
+        public function setNombre($nombre) {
+            $this->nombre = $nombre;
+        }
+    
+        public function setCedula($cedula) {
+            $this->cedula = $cedula;
+        }
+    
+        public function setEmail($email) {
+            $this->email = $email;
+        }
+    
+        public function setEstado($estado) {
+            $this->estado = $estado;
+        }
+    
+        public function setC_Departamento($c_depatamento) {
+            $this->c_depatamento = $c_depatamento;
+        }
+    
+        public function setC_Centro_Costo($c_centro_costo) {
+            $this->c_centro_costo = $c_centro_costo;
+        }
+    
+        public function setSexo($sexo) {
+            $this->sexo = $sexo;
+        }
+    
+        public function setFecha_Nacimiento($fecha_nacimiento) {
+            $this->fecha_nacimiento = $fecha_nacimiento;
+        }
+    
+        public function setFecha_Ingreso($fecha_ingreso) {
+            $this->fecha_ingreso = $fecha_ingreso;
+        }
+    
+        public function setUbicacion($ubicacion) {
+            $this->ubicacion = $ubicacion;
+        }
