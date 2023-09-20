@@ -76,26 +76,28 @@
             }
         }
         
-
-        //función para validar si la cedula existe
-        public function validar_cedula(){
-            $instruccion = "CALL sp_validar_cedula";
-            $consulta = $this->_db->query($instruccion);
-            if ($consulta) {
-                $resultado = $consulta->fetch_all(MYSQLI_ASSOC);
-                $consulta->close(); 
-                return $resultado;
+        public function validar_cedula() {
+            $instruccion = "CALL sp_validar_cedula(?)";
+            $stmt = $this->_db->prepare($instruccion);
+            $stmt->bind_param("s", $this->cedula);
+            if ($stmt->execute()) {
+                $resultado = $stmt->get_result();
+                $datos = $resultado->fetch_all(MYSQLI_ASSOC);
+                $stmt->close();
+                return $datos;
             } else {
                 return false;
             }
         }
         
+        
 
         //función para ingresar valores mediante el uso de un excel 
-        public function insertar_empleados($id, $nombre, $cedula, $email, $estado, $c_depatamento, $c_centro_costo, $sexo, $fecha_nacimiento, $fecha_ingreso, $ubicacion){
+        public function insertar_empleados(){
             $instrucion = "CALL sp_insertar_empleado_mediante_tablas_excel(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?)";
             $stmt = $this->_db->prepare($instrucion);
-            $stmt->bind_param("isssssssss",$id, $nombre, $cedula, $email, $estado, $c_depatamento, $c_centro_costo, $sexo, $fecha_nacimiento, $fecha_ingreso, $ubicacion);
+            $stmt->bind_param("issssssssss",$this->id, $this->nombre, $this->cedula, $this->email, $this->estado, $this->c_centro_costo, $this->sexo, $this->fecha_nacimiento, $this->fecha_ingreso, $this->ubicacion, $this->c_depatamento);
+            //var_dump($stmt);
             $stmt->execute();
         }
     }

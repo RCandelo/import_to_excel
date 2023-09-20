@@ -24,17 +24,17 @@
     header("Content-Type: text/html;charset=utf-8");
     include('./sql/consulta.php');
     $obj_empleados = new consulta();
-    $total_client = $obj_empleados->listar_empleados();
+    $total_colaboradores= $obj_empleados->listar_empleados();
     ?>
 
     <h6 class="text-center">
-       Lista de Clientes <strong>(<?php //echo $total_client; ?>)</strong>
+       Lista de Colaboradores <strong>(<?php echo $total_colaboradores; ?>)</strong>
     </h6>
     <?php
     $obj_agenda = new consulta();
-        $actividades = $obj_agenda->listar_empleados();
-    if(isset($actividades)){
-        $nfilas = count($actividades);
+        $registros = $obj_agenda->listar_empleados();
+    if(isset($registros)){
+        $nfilas = count($registros);
 
         if($nfilas > 0) {
             print("<table>\n");
@@ -45,13 +45,13 @@
             print("<th>&nbsp email &nbsp</th>\n");
             print("</tr>\n");
 
-            foreach($actividades as $actividad) {
+            foreach($registros as $registro) {
                 print("<tr>\n");
-                print("<tr>\n<td> &nbsp".$actividad['nombre_empleado']."&nbsp</td>\n");
-                print("<td> &nbsp" . $actividad['cedula_empleado'] . "&nbsp</td>\n");
-                print("<td> &nbsp" . $actividad['ubicacion'] . "&nbsp</td>\n");
-                print("<td> &nbsp" . $actividad['email'] . "&nbsp</td>\n");
-                //$datetimerange = new DateTime($actividad['rango']);
+                print("<tr>\n<td> &nbsp".$registro['nombre_empleado']."&nbsp</td>\n");
+                print("<td> &nbsp" . $registro['cedula_empleado'] . "&nbsp</td>\n");
+                print("<td> &nbsp" . $registro['ubicacion'] . "&nbsp</td>\n");
+                print("<td> &nbsp" . $registro['email'] . "&nbsp</td>\n");
+                //$datetimerange = new DateTime($registro['rango']);
                 //print("<td>&nbsp" . $datetimerange->format("d/M/Y") . "&nbsp</td>\n");
                 print("&nbsp</td>\n");
                 print("</tr>\n");
@@ -59,7 +59,7 @@
             print("</table>\n");
 
         } else {
-            print("No tiene actividades registradas.");
+            print("No tiene registros registradas.");
         }
     }else { print("No hay registro");
     }
